@@ -20,6 +20,7 @@ function Navbar() {
           <Link className="hover:text-blue-400 transition-colors duration-300" to="/">Home</Link>
           <Link className="hover:text-blue-400 transition-colors duration-300" to="/about">About</Link>
           <Link className="hover:text-blue-400 transition-colors duration-300" to="/projects">Projects</Link>
+          <Link className="hover:text-blue-400 transition-colors duration-300" to="/experience">Experience</Link>
 
           {}
           <a 
@@ -57,6 +58,7 @@ function Navbar() {
           <Link onClick={toggleMenu} className="block hover:text-blue-400 transition-colors duration-300" to="/">Home</Link>
           <Link onClick={toggleMenu} className="block hover:text-blue-400 transition-colors duration-300" to="/about">About</Link>
           <Link onClick={toggleMenu} className="block hover:text-blue-400 transition-colors duration-300" to="/projects">Projects</Link>
+          <Link onClick={toggleMenu} className="block hover:text-blue-400 transition-colors duration-300" to="/experience" > Experience </Link>
 
           <a
             href="/Praneel_Sreepada_Resume.pdf"
