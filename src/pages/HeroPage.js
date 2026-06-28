@@ -20,7 +20,7 @@ function HeroPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden px-6">
+    <div className="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden px-6 pt-16">
 
       {/* background glow */}
       <div className="absolute inset-0">
@@ -33,7 +33,7 @@ function HeroPage() {
         {/* LEFT */}
         <div className="space-y-6 text-center md:text-left">
 
-          <p className="text-cyan-400 uppercase tracking-widest text-sm">
+          <p className="text-cyan-400 uppercase tracking-widest text-lg">
             Building backend systems & AI tools
           </p>
 
@@ -59,7 +59,7 @@ function HeroPage() {
           <div className="flex gap-4 justify-center md:justify-start pt-4">
 
             <a
-              href="https://github.com/praneels7"
+              href="https://github.com/praneelsreepada"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 rounded-xl border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition"

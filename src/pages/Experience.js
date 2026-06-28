@@ -28,7 +28,7 @@ function Experience() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white p-8 md:p-16">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white p-8 pt-24 md:p-16 md:pt-24">
       <div className="max-w-6xl mx-auto">
 
         <h1 className="text-6xl md:text-8xl font-black tracking-tight mb-16">
@@ -43,9 +43,11 @@ function Experience() {
                 {exp.title}
               </h3>
 
-              <p className="text-cyan-400 font-semibold mb-4">
-                {exp.company}
-              </p>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-cyan-400 font-semibold">{exp.company}</span>
+                <span className="text-gray-500">|</span>
+                <span className="text-gray-400 text-sm">{exp.date}</span>
+              </div>
 
               <ul className="space-y-3">
                 {exp.achievements.map((a, i) => (
