@@ -61,7 +61,7 @@ function ProjectsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white p-8 pt-24 md:p-16 md:pt-24">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white p-8 md:p-16">
       <div className="max-w-6xl mx-auto">
 
         <h1 className="text-6xl md:text-8xl font-black mb-16">
@@ -70,7 +70,7 @@ function ProjectsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
-            <div key={index} className="bg-slate-800/50 rounded-2xl p-6 md:p-8 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10">
+            <div key={index} className="bg-slate-800/50 rounded-2xl p-6 md:p-8 border border-slate-700">
 
               <div className="text-3xl mb-4">{project.logo}</div>
 
