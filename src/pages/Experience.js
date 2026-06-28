@@ -24,16 +24,6 @@ function Experience() {
         "Developed retrieval-augmented generation (RAG) system for contextual PDF question answering.",
         "Led engineering teams and recruitment initiatives, increasing engagement by 70%."
       ]
-    },
-    {
-      title: "Retail Sales Associate",
-      company: "Uniqlo",
-      date: "Oct 2024 – Mar 2025",
-      logo: "🛍️",
-      achievements: [
-        "Supported retail operations including customer service, inventory handling, and sales processing.",
-        "Operated across multiple store functions including cashiering and fulfillment workflows."
-      ]
     }
   ];
 
