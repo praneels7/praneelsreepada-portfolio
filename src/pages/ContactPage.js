@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
+import ParticleField from "../components/ParticleField";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -8,7 +9,6 @@ function Contact() {
     subject: "",
     message: "",
   });
-
   const [status, setStatus] = useState("");
 
   const handleChange = (e) => {
@@ -18,11 +18,11 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus("Sending...");
+    setStatus("sending");
 
     emailjs
       .send(
-        "service_vsiefo5", // ✅ YOUR SERVICE ID (you gave this)
+        "service_vsiefo5",
         "template_xj40rbj",
         {
           name: formData.name,
@@ -34,55 +34,54 @@ function Contact() {
       )
       .then(
         () => {
-          setStatus("Message sent successfully 🚀");
-
-          setFormData({
-            name: "",
-            email: "",
-            subject: "",
-            message: "",
-          });
+          setStatus("success");
+          setFormData({ name: "", email: "", subject: "", message: "" });
+          setTimeout(() => setStatus(""), 4000);
         },
-        (error) => {
-          console.error(error);
-          setStatus("Failed to send message. Try again.");
+        () => {
+          setStatus("error");
+          setTimeout(() => setStatus(""), 4000);
         }
       );
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white px-6 pt-16">
-      <div className="max-w-2xl w-full">
-        <h1 className="text-6xl md:text-8xl font-black mb-4">
-          Contact Me!
-        </h1>
+    <div className="min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden">
+      <ParticleField />
+      <div className="max-w-2xl w-full relative z-10">
 
-        <p className="text-gray-400 text-lg mb-12">
-          I’m always down to connect, build cool things, or just chat. If you’ve
-          got a project or just want to reach out, send a message.
-        </p>
+        <div className="animate-fade-in-up mb-12">
+          <p className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-4">
+            Get in touch
+          </p>
+          <h2 className="text-5xl md:text-7xl font-black tracking-tight mb-4">
+            Contact
+          </h2>
+          <p className="text-gray-400 text-lg">
+            Got a project idea or just want to chat? Send me a message.
+          </p>
+        </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700 space-y-6"
-        >
-          <input
-            name="name"
-            placeholder="Your Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg"
-          />
-
-          <input
-            name="email"
-            placeholder="Your Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg"
-          />
+        <form onSubmit={handleSubmit} className="animate-fade-in-up delay-200 glass-card p-8 space-y-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              name="name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="input-field"
+            />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="input-field"
+            />
+          </div>
 
           <input
             name="subject"
@@ -90,7 +89,7 @@ function Contact() {
             value={formData.subject}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg"
+            className="input-field"
           />
 
           <textarea
@@ -100,22 +99,25 @@ function Contact() {
             onChange={handleChange}
             required
             rows="5"
-            className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg resize-none"
+            className="input-field resize-none"
           />
 
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 text-white font-bold py-4 rounded-lg hover:scale-[1.02] transition"
-          >
-            Send Message
+          <button type="submit" disabled={status === "sending"} className="btn-gradient w-full py-4">
+            {status === "sending" ? "Sending..." : "Send Message"}
           </button>
 
-          {status && (
-            <p className="text-center text-cyan-400 font-semibold">
-              {status}
+          {status === "success" && (
+            <p className="text-center text-green-400 text-sm font-medium">
+              Message sent successfully!
+            </p>
+          )}
+          {status === "error" && (
+            <p className="text-center text-red-400 text-sm font-medium">
+              Failed to send. Please try again.
             </p>
           )}
         </form>
+
       </div>
     </div>
   );

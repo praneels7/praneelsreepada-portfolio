@@ -1,73 +1,54 @@
 import React from "react";
+import ParticleField from "../components/ParticleField";
 
 function About() {
   const roles = [
-    {
-      title: "Backend & Systems Engineer",
-      gradient: "from-cyan-400 via-blue-500 to-purple-600",
-      icon: "⚙️"
-    },
-    {
-      title: "AI / LLM Developer",
-      gradient: "from-purple-400 via-pink-500 to-cyan-400",
-      icon: "🧠"
-    },
-    {
-      title: "Full-Stack Engineer",
-      gradient: "from-cyan-400 via-teal-400 to-emerald-400",
-      icon: "🌐"
-    },
-    {
-      title: "Product Builder",
-      gradient: "from-orange-400 via-pink-400 to-purple-500",
-      icon: "🚀"
-    }
+    { title: "Backend & Systems", icon: "\u2699\uFE0F" },
+    { title: "AI / LLM", icon: "\uD83E\uDDE0" },
+    { title: "Full-Stack", icon: "\uD83C\uDF10" },
+    { title: "Product Builder", icon: "\uD83D\uDE80" },
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden px-6 pt-16">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden">
+      <ParticleField />
+      <div className="max-w-5xl mx-auto w-full relative z-10">
 
-        {/* Introduction Section */}
-        <div className="mb-16">
-          <p className="text-cyan-400 text-sm font-semibold tracking-wider uppercase mb-4">
-            ABOUT
+        <div className="animate-fade-in-up mb-16">
+          <p className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-4">
+            About
           </p>
 
-          <h1 className="text-6xl md:text-8xl font-black mb-8 tracking-tight">
-            I build systems, not just apps.
-          </h1>
+          <h2 className="text-5xl md:text-7xl font-black tracking-tight mb-8">
+            I build systems,<br />
+            <span className="text-gray-500">not just apps.</span>
+          </h2>
 
-          <p className="text-gray-300 text-lg md:text-xl max-w-3xl leading-relaxed">
-            I’m a Computer Science student at UT Dallas working on backend systems,
-            AI-powered applications, and production-grade engineering tools. 
-            Currently a Software Developer Intern at Snowflake, where I build
+          <p className="text-gray-400 text-lg md:text-xl max-w-3xl leading-relaxed">
+            I'm a Computer Science student at UT Dallas working on backend systems,
+            AI-powered applications, and production-grade engineering tools.
+            Currently a Software Engineering Intern at Snowflake, where I build
             automated testing systems for large-scale financial pipelines.
-            I focus on systems that are reliable, data-driven, and actually used in production.
           </p>
         </div>
 
-        {/* Role Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {roles.map((role, index) => (
+        {/* Role cards — minimal */}
+        <div className="animate-fade-in-up delay-300 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {roles.map((role, i) => (
             <div
-              key={index}
-              className="group relative bg-slate-900/50 backdrop-blur-sm rounded-3xl p-8 border-2 border-cyan-500/30 hover:border-cyan-400/60 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20"
+              key={i}
+              className="glass-card p-6 text-center group cursor-default"
             >
-              <div className="mb-6 flex justify-center">
-                <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${role.gradient} flex items-center justify-center text-4xl shadow-lg transform group-hover:rotate-12 transition-transform duration-300`}>
-                  {role.icon}
-                </div>
+              <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                {role.icon}
               </div>
-
-              <h3 className="text-xl font-bold text-center leading-tight">
+              <p className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
                 {role.title}
-              </h3>
-
-              <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${role.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 blur-xl`}></div>
+              </p>
             </div>
           ))}
         </div>
+
       </div>
     </div>
   );

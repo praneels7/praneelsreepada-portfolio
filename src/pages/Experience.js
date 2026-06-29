@@ -1,150 +1,118 @@
-import React, { useState } from "react";
+import React from "react";
+import ParticleField from "../components/ParticleField";
 
 function Experience() {
-  const [hovered, setHovered] = useState(null);
-
   const experience = [
     {
       title: "Software Engineering Intern",
       company: "Snowflake",
-      date: "May 2026 – Present",
+      date: "May 2026 \u2013 Present",
       logoSrc: "snowflake.png",
       accent: "#29B5E8",
-      glow: "rgba(41,181,232,0.25)",
+      current: true,
       achievements: [
-        "Built automated regression testing infrastructure for enterprise financial pipelines (ASC 606).",
-        "Designed fixture-based testing framework across multiple production services (Salesforce, Workday, Billing).",
-        "Developed JUnit-based diagnostics system mapping failures to field-level business logic, reducing debugging time from days to seconds."
+        "Designed and built an automated regression testing framework for Snowflake's internal revenue recognition pipeline (ASC 606), enabling zero-code test creation via JSON fixture files.",
+        "Architected fixture-based testing across 6 services (Workday, Salesforce, Billing Engine, RightRev, combined Pipeline, Affiliate Transfer) covering 5 contract lifecycle scenarios.",
+        "Achieved 100% field-level detection rate across 24+ test cases, validated by injecting 40+ edge case mutations with every regression caught.",
+        "Built a Streamlit diagnostic dashboard that parses JUnit XML results and maps stack trace line numbers to field names, reducing regression detection time from weeks to seconds."
       ]
     },
     {
-      title: "Software Developer & Director of Membership",
+      title: "Software Developer, Director of Membership, Project Lead",
       company: "Kappa Theta Pi",
-      date: "Jan 2025 – Present",
+      date: "Jan 2025 \u2013 Present",
       logoSrc: "ktp.png",
       accent: "#E8B339",
-      glow: "rgba(232,179,57,0.22)",
+      current: true,
       achievements: [
-        "Built internal tools and AI-powered document systems using React, FastAPI, and LangChain.",
-        "Developed retrieval-augmented generation (RAG) system for contextual PDF question answering.",
-        "Led engineering teams and recruitment initiatives, increasing engagement by 70%."
+        "Developed full-stack applications and internal tools using React, FastAPI, Node.js, Swift, and MongoDB Atlas.",
+        "Built AI-powered document processing applications leveraging LangChain and vector-based semantic retrieval for contextual question-answering from uploaded PDFs.",
+        "Led cross-functional student engineering teams through project planning, development, testing, and deployment.",
+        "Directed recruitment and onboarding initiatives that increased chapter membership and engagement by over 70%."
       ]
     }
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden px-6 pt-16">
-      <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden">
+      <ParticleField />
+      <div className="max-w-5xl mx-auto w-full relative z-10">
 
-        <div className="mb-16">
-          <span className="text-cyan-400 font-mono text-sm tracking-widest uppercase">
-            Career timeline
-          </span>
-          <h1 className="text-6xl md:text-8xl font-black tracking-tight mt-2">
+        <div className="animate-fade-in-up mb-16">
+          <p className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-4">
+            Career
+          </p>
+          <h2 className="text-5xl md:text-7xl font-black tracking-tight">
             Experience
-          </h1>
+          </h2>
         </div>
 
         <div className="relative">
-          {/* Timeline rail */}
-          <div
-            className="absolute left-[27px] md:left-[35px] top-3 bottom-3 w-px bg-gradient-to-b from-slate-600 via-slate-700 to-transparent"
-            aria-hidden="true"
-          />
+          {/* Timeline line */}
+          <div className="absolute left-[23px] md:left-[31px] top-6 bottom-6 w-px bg-gradient-to-b from-slate-600 via-slate-700 to-transparent" />
 
-          <div className="space-y-10">
-            {experience.map((exp, index) => {
-              const isHovered = hovered === index;
-              return (
-                <div key={index} className="relative flex gap-6 md:gap-8">
-
-                  {/* Node + logo */}
-                  <div className="relative flex-shrink-0 z-10">
-                    <div
-                      className="w-14 h-14 md:w-[70px] md:h-[70px] rounded-2xl flex items-center justify-center border transition-all duration-300 overflow-hidden"
-                      style={{
-                        backgroundColor: "rgba(15,23,42,0.9)",
-                        borderColor: isHovered ? exp.accent : "rgba(100,116,139,0.4)",
-                        boxShadow: isHovered ? `0 0 0 4px ${exp.glow}` : "none"
-                      }}
-                    >
-                      {exp.logoSrc ? (
-                        <img
-                          src={exp.logoSrc}
-                          alt={`${exp.company} logo`}
-                          className="w-2/3 h-2/3 object-contain"
-                        />
-                      ) : (
-                        <span
-                          className="text-lg md:text-xl font-bold"
-                          style={{ color: exp.accent }}
-                        >
-                          {exp.company.charAt(0)}
-                        </span>
-                      )}
-                    </div>
-                    {/* Pulse dot marking "current" role */}
-                    {exp.date.includes("Present") && (
-                      <span
-                        className="absolute -top-1 -right-1 w-3 h-3 rounded-full animate-pulse"
-                        style={{ backgroundColor: exp.accent }}
-                        aria-label="Current role"
-                      />
-                    )}
-                  </div>
-
-                  {/* Card */}
+          <div className="space-y-8">
+            {experience.map((exp, index) => (
+              <div key={index} className="relative flex gap-6 md:gap-8">
+                {/* Timeline node */}
+                <div className="relative flex-shrink-0 z-10">
                   <div
-                    onMouseEnter={() => setHovered(index)}
-                    onMouseLeave={() => setHovered(null)}
-                    className="flex-1 rounded-2xl p-6 md:p-8 border bg-slate-800/40 backdrop-blur-sm transition-all duration-300"
+                    className="w-12 h-12 md:w-16 md:h-16 rounded-xl flex items-center justify-center border overflow-hidden transition-all duration-300 hover:scale-105"
                     style={{
-                      borderColor: isHovered ? exp.accent + "80" : "rgba(51,65,85,0.6)",
-                      boxShadow: isHovered ? `0 8px 30px -8px ${exp.glow}` : "none",
-                      transform: isHovered ? "translateY(-2px)" : "translateY(0)"
+                      backgroundColor: "rgba(15, 23, 42, 0.9)",
+                      borderColor: `${exp.accent}40`,
                     }}
                   >
-                    <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
-                      <h3 className="text-2xl md:text-3xl font-bold">
-                        {exp.title}
-                      </h3>
-                      <span
-                        className="text-xs font-mono px-2 py-1 rounded-full border"
-                        style={{
-                          color: exp.accent,
-                          borderColor: exp.accent + "40",
-                          backgroundColor: exp.accent + "10"
-                        }}
-                      >
-                        {exp.date}
-                      </span>
-                    </div>
+                    <img
+                      src={exp.logoSrc}
+                      alt={`${exp.company} logo`}
+                      className="w-2/3 h-2/3 object-contain"
+                    />
+                  </div>
+                  {exp.current && (
+                    <span
+                      className="absolute -top-1 -right-1 w-3 h-3 rounded-full animate-pulse"
+                      style={{ backgroundColor: exp.accent }}
+                    />
+                  )}
+                </div>
 
-                    <div className="flex items-center gap-2 mb-5">
-                      <span
-                        className="font-semibold"
-                        style={{ color: exp.accent }}
-                      >
-                        {exp.company}
-                      </span>
-                    </div>
-
-                    <ul className="space-y-3">
-                      {exp.achievements.map((a, i) => (
-                        <li key={i} className="text-gray-300 flex gap-3 leading-relaxed">
-                          <span
-                            className="mt-2 flex-shrink-0 w-1.5 h-1.5 rounded-full"
-                            style={{ backgroundColor: exp.accent }}
-                          />
-                          <span>{a}</span>
-                        </li>
-                      ))}
-                    </ul>
+                {/* Card */}
+                <div className="flex-1 glass-card p-6 md:p-8">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+                    <h3 className="text-xl md:text-2xl font-bold text-white">
+                      {exp.title}
+                    </h3>
+                    <span
+                      className="text-xs font-mono px-2.5 py-1 rounded-full border"
+                      style={{
+                        color: exp.accent,
+                        borderColor: `${exp.accent}30`,
+                        backgroundColor: `${exp.accent}10`
+                      }}
+                    >
+                      {exp.date}
+                    </span>
                   </div>
 
+                  <p className="font-medium text-sm mb-4" style={{ color: exp.accent }}>
+                    {exp.company}
+                  </p>
+
+                  <ul className="space-y-2.5">
+                    {exp.achievements.map((a, i) => (
+                      <li key={i} className="text-gray-400 text-sm flex gap-3 leading-relaxed">
+                        <span
+                          className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full"
+                          style={{ backgroundColor: exp.accent }}
+                        />
+                        <span>{a}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
 

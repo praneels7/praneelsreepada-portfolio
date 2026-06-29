@@ -1,24 +1,24 @@
 import React from "react";
+import ParticleField from "../components/ParticleField";
 
 function ProjectsPage() {
-
   const projects = [
     {
       title: "RAG Bot",
-      tech: "React, Node.js, MongoDB, Gemini API, LangChain",
-      date: "January 2026 – February 2026",
-      logo: "🧠",
+      tech: ["React", "Node.js", "MongoDB", "Gemini API", "LangChain"],
+      date: "Dec 2025 \u2013 Present",
+      icon: "\uD83E\uDDE0",
       description: [
         "Built retrieval-augmented generation pipeline for document-grounded question answering.",
-        "Implemented semantic chunking and embedding-based search over uploaded PDFs.",
-        "Designed full-stack system enabling real-time querying of contextual knowledge bases."
+        "Used MongoDB Atlas to store processed document data and retrieve relevant sections for LLM responses.",
+        "Built a full-stack app using React and Node.js to support document upload, indexing, and real-time querying."
       ]
     },
     {
       title: "VitalTrack AI",
-      tech: "Xcode, Swift, Figma",
-      date: "Feb 2025 – May 2025",
-      logo: "📱",
+      tech: ["Xcode", "Swift", "Figma"],
+      date: "Feb \u2013 May 2025",
+      icon: "\uD83D\uDCF1",
       description: [
         "Designed iOS frontend for AI-powered health monitoring system integrating wearable and medical data.",
         "Built interface supporting real-time health insights, anomaly detection, and medication tracking.",
@@ -26,21 +26,20 @@ function ProjectsPage() {
       ]
     },
     {
-      title: "Trash Trends Venture Project",
-      tech: "YOLO, Python, Anaconda, VS Code",
-      date: "Aug 2024 – Jan 2025",
-      logo: "🤖",
+      title: "Trash Trends",
+      tech: ["YOLO", "Python", "Computer Vision"],
+      date: "Aug 2025 \u2013 Jan 2026",
+      icon: "\uD83E\uDD16",
       description: [
-        "Trained YOLO-based object detection model on drone imagery for environmental waste classification.",
-        "Processed and labeled custom datasets to improve detection performance.",
-        "Improved tracking accuracy by 25% through model tuning and data refinement."
+        "Utilized Python and drone technology for computer vision to track urban waste patterns.",
+        "Trained and fine-tuned a YOLO model on custom-labeled drone imagery, improving detection accuracy by 50% and tracking accuracy by 25%."
       ]
     },
     {
-      title: "META Web Application",
-      tech: "Microsoft Azure, HTML, CSS",
-      date: "May 2024 – Aug 2024",
-      logo: "🏥",
+      title: "META Web App",
+      tech: ["Azure", "Computer Vision API", "HTML/CSS"],
+      date: "May \u2013 Aug 2024",
+      icon: "\uD83C\uDFE5",
       description: [
         "Built AI-assisted triage web application using Azure Computer Vision API.",
         "Integrated image-based classification pipeline for emergency response support.",
@@ -48,10 +47,10 @@ function ProjectsPage() {
       ]
     },
     {
-      title: "FinSure Website",
-      tech: "HTML, CSS, Node.js, MongoDB, Vercel",
+      title: "FinSure",
+      tech: ["Node.js", "MongoDB", "Vercel"],
       date: "Nov 2024",
-      logo: "💰",
+      icon: "\uD83D\uDCB0",
       description: [
         "Built financial services web platform for underbanked users to manage accounts and credit access.",
         "Developed responsive frontend with accessible UI/UX design principles.",
@@ -61,38 +60,49 @@ function ProjectsPage() {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden px-6 pt-16">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden">
+      <ParticleField />
+      <div className="max-w-6xl mx-auto w-full relative z-10">
 
-        <h1 className="text-6xl md:text-8xl font-black mb-16">
-          Projects
-        </h1>
+        <div className="animate-fade-in-up mb-16">
+          <p className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-4">
+            Work
+          </p>
+          <h2 className="text-5xl md:text-7xl font-black tracking-tight">
+            Projects
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {projects.map((project, index) => (
-            <div key={index} className="bg-slate-800/50 rounded-2xl p-6 md:p-8 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10">
+            <div key={index} className="glass-card p-6 md:p-8 group">
+              <div className="flex items-start justify-between mb-4">
+                <span className="text-2xl group-hover:scale-110 transition-transform duration-300">
+                  {project.icon}
+                </span>
+                <span className="text-xs text-gray-500 font-mono">
+                  {project.date}
+                </span>
+              </div>
 
-              <div className="text-3xl mb-4">{project.logo}</div>
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+                {project.title}
+              </h3>
 
-              <h3 className="text-2xl font-bold">{project.title}</h3>
-
-              <p className="text-cyan-400 text-sm mb-1">
-                {project.tech}
-              </p>
-
-              <p className="text-gray-400 text-sm mb-4">
-                {project.date}
-              </p>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {project.tech.map((t, i) => (
+                  <span key={i} className="tech-pill">{t}</span>
+                ))}
+              </div>
 
               <ul className="space-y-2">
                 {project.description.map((d, i) => (
-                  <li key={i} className="text-gray-300 flex gap-2 text-sm">
-                    <span className="text-cyan-400">•</span>
+                  <li key={i} className="text-gray-400 text-sm flex gap-2 leading-relaxed">
+                    <span className="text-cyan-500/60 mt-1 flex-shrink-0">\u2022</span>
                     <span>{d}</span>
                   </li>
                 ))}
               </ul>
-
             </div>
           ))}
         </div>
