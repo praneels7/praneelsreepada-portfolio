@@ -1,23 +1,38 @@
 import React, { useState, useEffect } from "react";
 
 function HeroPage() {
-  const [typedText, setTypedText] = useState("");
   const fullText = "Software Developer Intern @ Snowflake";
 
+  const [typedText, setTypedText] = useState("");
+  const [index, setIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
   useEffect(() => {
-    let index = 0;
+    const speed = deleting ? 40 : 70;
 
-    const timer = setInterval(() => {
-      if (index <= fullText.length) {
-        setTypedText(fullText.slice(0, index));
-        index++;
+    const timer = setTimeout(() => {
+      if (!deleting) {
+        // typing forward
+        if (index < fullText.length) {
+          setTypedText(fullText.slice(0, index + 1));
+          setIndex(index + 1);
+        } else {
+          // pause then start deleting
+          setTimeout(() => setDeleting(true), 1500);
+        }
       } else {
-        clearInterval(timer);
+        // deleting
+        if (index > 0) {
+          setTypedText(fullText.slice(0, index - 1));
+          setIndex(index - 1);
+        } else {
+          setDeleting(false);
+        }
       }
-    }, 70);
+    }, speed);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearTimeout(timer);
+  }, [index, deleting]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden px-6 pt-16">
@@ -44,16 +59,11 @@ function HeroPage() {
           </h1>
 
           <div className="h-10">
-            <p className="text-xl md:text-2xl text-gray-300">
+            <p className="text-xl md:text-2xl text-gray-300 font-mono">
               {typedText}
               <span className="animate-pulse">|</span>
             </p>
           </div>
-
-          <p className="text-gray-400 max-w-xl">
-            Computer Science student at UT Dallas focused on distributed systems,
-            AI applications, and production engineering.
-          </p>
 
           {/* LINKS */}
           <div className="flex gap-4 justify-center md:justify-start pt-4">
@@ -78,7 +88,7 @@ function HeroPage() {
 
             <a
               href="mailto:praneel.sreepada@gmail.com"
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-500 hover:scale-105 transition"
+              className="px-6 py-3 rounded-xl border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition"
             >
               Email
             </a>
@@ -89,7 +99,6 @@ function HeroPage() {
         {/* RIGHT IMAGE */}
         <div className="flex justify-center md:justify-end items-start">
           <div className="relative -mt-6 md:-mt-10">
-            {/* glow */}
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 blur-2xl opacity-30 rounded-full" />
 
             <img

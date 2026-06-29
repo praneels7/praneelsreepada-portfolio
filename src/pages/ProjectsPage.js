@@ -61,7 +61,7 @@ function ProjectsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white p-8 pt-24 md:p-16 md:pt-24">
+    <div className="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden px-6 pt-16">
       <div className="max-w-6xl mx-auto">
 
         <h1 className="text-6xl md:text-8xl font-black mb-16">

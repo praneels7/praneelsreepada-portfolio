@@ -25,7 +25,7 @@ function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white p-8 pt-24 md:p-16 md:pt-24">
+    <div className="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden px-6 pt-16">
       <div className="max-w-7xl mx-auto">
 
         {/* Introduction Section */}
@@ -41,7 +41,7 @@ function About() {
           <p className="text-gray-300 text-lg md:text-xl max-w-3xl leading-relaxed">
             I’m a Computer Science student at UT Dallas working on backend systems,
             AI-powered applications, and production-grade engineering tools. 
-            Currently a Software Engineering Intern at Snowflake, where I build
+            Currently a Software Developer Intern at Snowflake, where I build
             automated testing systems for large-scale financial pipelines.
             I focus on systems that are reliable, data-driven, and actually used in production.
           </p>
