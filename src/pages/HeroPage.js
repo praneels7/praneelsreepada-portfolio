@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 function HeroPage() {
   const [typedText, setTypedText] = useState("");
-  const fullText = "Software Engineering Intern @ Snowflake";
+  const fullText = "Software Developer Intern @ Snowflake";
 
   useEffect(() => {
     let index = 0;
