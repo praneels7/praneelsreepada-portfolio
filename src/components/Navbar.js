@@ -82,13 +82,19 @@ function Navbar() {
       >
         {/* Logo */}
         <a
-          href="#home"
-          onClick={(e) => scrollTo(e, "#home")}
-          className="group relative text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent transition-transform duration-300 hover:scale-105"
+        href="#home"
+        onClick={(e) => scrollTo(e, "#home")}
+        className="group relative flex items-center transition-transform duration-300 hover:scale-105"
         >
-          PS
-          <span className="absolute -inset-2 rounded-lg bg-cyan-400/0 group-hover:bg-cyan-400/10 transition-colors duration-300 -z-10" />
-        </a>
+        <img
+          src="/PS_Logo.png"
+          alt="Praneel Logo"
+          className="h-10 w-10 rounded-full object-cover"
+          style={{ transform: "scale(1.25)" }}
+        />
+
+        <span className="absolute -inset-2 rounded-lg bg-cyan-400/0 group-hover:bg-cyan-400/10 transition-colors duration-300 -z-10" />
+      </a>
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-1 font-medium">
