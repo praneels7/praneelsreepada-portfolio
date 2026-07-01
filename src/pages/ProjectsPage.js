@@ -4,7 +4,6 @@ import ParticleField from "../components/ParticleField";
 function ProjectsPage() {
   const projects = [
     {
-      {
       title: "Personal Portfolio Website",
       tech: ["React", "Tailwind CSS", "EmailJS"],
       date: "June 2026 - Present",
