@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [pillStyle, setPillStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const location = useLocation();
+  const navRef = useRef(null);
+  const linkRefs = useRef({});
 
   const links = [
     { label: "Home", to: "/" },
@@ -13,6 +16,20 @@ function Navbar() {
     { label: "Experience", to: "/experience" },
     { label: "Contact", to: "/contact" },
   ];
+
+  const updatePill = useCallback(() => {
+    const activeLink = linkRefs.current[location.pathname];
+    const nav = navRef.current;
+    if (activeLink && nav) {
+      const navRect = nav.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+      setPillStyle({
+        left: linkRect.left - navRect.left,
+        width: linkRect.width,
+        opacity: 1,
+      });
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -26,11 +43,16 @@ function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false);
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  useEffect(() => {
+    updatePill();
+    window.addEventListener("resize", updatePill);
+    return () => window.removeEventListener("resize", updatePill);
+  }, [updatePill]);
 
   return (
     <nav
@@ -41,7 +63,6 @@ function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex justify-between items-center h-16">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <img
             src="/PS_Logo.png"
@@ -53,15 +74,25 @@ function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden md:flex items-center gap-1 relative" ref={navRef}>
+          <div
+            className="nav-pill"
+            style={{
+              left: pillStyle.left,
+              width: pillStyle.width,
+              opacity: pillStyle.opacity,
+              top: "50%",
+              transform: "translateY(-50%)",
+            }}
+          />
           {links.map(({ label, to }) => (
             <Link
               key={label}
               to={to}
-              className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
+              ref={(el) => { linkRefs.current[to] = el; }}
+              className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg z-10 ${
                 location.pathname === to
-                  ? "text-cyan-400 bg-cyan-400/5"
+                  ? "text-cyan-400"
                   : "text-gray-400 hover:text-white hover:bg-white/5"
               }`}
             >
@@ -78,7 +109,6 @@ function Navbar() {
           </a>
         </div>
 
-        {/* Mobile toggle */}
         <button
           onClick={() => setIsOpen((v) => !v)}
           className="md:hidden w-9 h-9 flex items-center justify-center text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition"
@@ -91,7 +121,6 @@ function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <div className={`md:hidden overflow-hidden transition-all duration-300 ${
         isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
       }`}>

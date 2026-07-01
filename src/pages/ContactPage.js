@@ -46,11 +46,11 @@ function Contact() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center px-6 py-16 relative overflow-hidden">
       <ParticleField />
       <div className="max-w-2xl w-full relative z-10">
 
-        <div className="animate-fade-in-up mb-12">
+        <div className="animate-fade-in-up mb-8">
           <p className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-4">
             Get in touch
           </p>

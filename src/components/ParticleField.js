@@ -35,12 +35,42 @@ function ParticleField() {
     }
 
     const connectDist = 120;
-    const mouseDist = 150;
+    const mouseDist = 180;
+
+    const lerpColor = (t) => {
+      const cyan = [34, 211, 238];
+      const purple = [167, 139, 250];
+      const pink = [244, 114, 182];
+
+      let r, g, b;
+      if (t < 0.5) {
+        const s = t * 2;
+        r = cyan[0] + (purple[0] - cyan[0]) * s;
+        g = cyan[1] + (purple[1] - cyan[1]) * s;
+        b = cyan[2] + (purple[2] - cyan[2]) * s;
+      } else {
+        const s = (t - 0.5) * 2;
+        r = purple[0] + (pink[0] - purple[0]) * s;
+        g = purple[1] + (pink[1] - purple[1]) * s;
+        b = purple[2] + (pink[2] - purple[2]) * s;
+      }
+      return `${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)}`;
+    };
 
     const animate = () => {
       ctx.clearRect(0, 0, w(), h());
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
+
+      // Subtle radial spotlight following cursor
+      if (mx > 0 && my > 0) {
+        const gradient = ctx.createRadialGradient(mx, my, 0, mx, my, mouseDist * 1.5);
+        gradient.addColorStop(0, "rgba(34, 211, 238, 0.015)");
+        gradient.addColorStop(0.5, "rgba(167, 139, 250, 0.008)");
+        gradient.addColorStop(1, "transparent");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, w(), h());
+      }
 
       for (const p of particles) {
         p.x += p.vx;
@@ -52,18 +82,26 @@ function ParticleField() {
         const dyM = p.y - my;
         const distM = Math.sqrt(dxM * dxM + dyM * dyM);
         const nearMouse = distM < mouseDist;
+        const proximity = 1 - distM / mouseDist;
 
-        const alpha = nearMouse ? 0.9 : 0.3;
-        const color = nearMouse ? "34, 211, 238" : "148, 163, 184";
+        let alpha, color;
+        if (nearMouse) {
+          alpha = 0.4 + proximity * 0.6;
+          color = lerpColor(proximity);
+        } else {
+          alpha = 0.25;
+          color = "148, 163, 184";
+        }
+
         ctx.beginPath();
-        ctx.arc(p.x, p.y, nearMouse ? p.radius * 1.8 : p.radius, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, nearMouse ? p.radius * (1 + proximity * 1.2) : p.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${color}, ${alpha})`;
         ctx.fill();
 
         if (nearMouse) {
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius * 4, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(34, 211, 238, ${0.08 * (1 - distM / mouseDist)})`;
+          ctx.arc(p.x, p.y, p.radius * (3 + proximity * 2), 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${color}, ${0.06 * proximity})`;
           ctx.fill();
         }
       }
@@ -82,15 +120,18 @@ function ParticleField() {
             const nearLine = distMid < mouseDist;
 
             const lineAlpha = nearLine
-              ? 0.3 * (1 - dist / connectDist)
-              : 0.06 * (1 - dist / connectDist);
-            const lineColor = nearLine ? "34, 211, 238" : "148, 163, 184";
+              ? 0.25 * (1 - dist / connectDist) * (1 - distMid / mouseDist)
+              : 0.04 * (1 - dist / connectDist);
+
+            const lineColor = nearLine
+              ? lerpColor(1 - distMid / mouseDist)
+              : "148, 163, 184";
 
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.strokeStyle = `rgba(${lineColor}, ${lineAlpha})`;
-            ctx.lineWidth = nearLine ? 0.8 : 0.4;
+            ctx.lineWidth = nearLine ? 0.8 : 0.3;
             ctx.stroke();
           }
         }

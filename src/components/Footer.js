@@ -23,23 +23,24 @@ function Footer() {
   ];
 
   return (
-    <footer className="border-t border-white/5 py-12 px-6">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+    <footer className="relative py-10 px-6">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="text-center md:text-left">
           <p className="text-sm font-semibold text-white">Praneel Sreepada</p>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-gray-500 mt-0.5">
             Designed & built from scratch
           </p>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-2">
           {socials.map(({ label, href, icon, fill }) => (
             <a
               key={label}
               href={href}
               target={href.startsWith("mailto") ? undefined : "_blank"}
               rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 text-gray-400 hover:text-cyan-400 hover:border-cyan-400/40 hover:bg-cyan-400/5 transition-all duration-200"
+              className="w-9 h-9 flex items-center justify-center rounded-lg border border-white/8 text-gray-400 hover:text-cyan-400 hover:border-cyan-400/40 hover:bg-cyan-400/5 transition-all duration-200"
               aria-label={label}
             >
               <svg className="w-4 h-4" fill={fill ? "currentColor" : "none"} stroke={fill ? "none" : "currentColor"} viewBox="0 0 24 24">

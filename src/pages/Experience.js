@@ -34,11 +34,11 @@ function Experience() {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center px-6 py-16 relative overflow-hidden">
       <ParticleField />
       <div className="max-w-5xl mx-auto w-full relative z-10">
 
-        <div className="animate-fade-in-up mb-16">
+        <div className="animate-fade-in-up mb-10">
           <p className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-4">
             Career
           </p>
@@ -51,9 +51,9 @@ function Experience() {
           {/* Timeline line */}
           <div className="absolute left-[23px] md:left-[31px] top-6 bottom-6 w-px bg-gradient-to-b from-slate-600 via-slate-700 to-transparent" />
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             {experience.map((exp, index) => (
-              <div key={index} className="relative flex gap-6 md:gap-8">
+              <div key={index} className="relative flex gap-5 md:gap-7">
                 {/* Timeline node */}
                 <div className="relative flex-shrink-0 z-10">
                   <div
