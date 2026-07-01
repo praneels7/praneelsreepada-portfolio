@@ -4,6 +4,18 @@ import ParticleField from "../components/ParticleField";
 function ProjectsPage() {
   const projects = [
     {
+      {
+      title: "Personal Portfolio Website",
+      tech: ["React", "Tailwind CSS", "EmailJS"],
+      date: "June 2026 - Present",
+      icon: "\uD83C\uDF10",
+      github: "https://github.com/praneels7/praneelsreepada-portfolio",
+      description: [
+        "Designed and built this personal portfolio from scratch using React and Tailwind CSS.",
+        "Features interactive particle field, bento-grid layout, and responsive design.",
+        "Implemented animated navigation pill, gradient hover effects, and scroll-reveal transitions."
+      ]
+    },
       title: "RAG Bot",
       tech: ["React", "Node.js", "MongoDB", "Gemini API", "LangChain"],
       date: "Dec 2025 \u2013 Present",
@@ -62,18 +74,6 @@ function ProjectsPage() {
         "Implemented backend data persistence using Node.js and MongoDB Atlas."
       ]
     },
-    {
-      title: "Portfolio",
-      tech: ["React", "Tailwind CSS", "EmailJS"],
-      date: "2025",
-      icon: "\uD83C\uDF10",
-      github: "https://github.com/praneels7/praneelsreepada-portfolio",
-      description: [
-        "Designed and built this personal portfolio from scratch using React and Tailwind CSS.",
-        "Features interactive particle field, bento-grid layout, and responsive design.",
-        "Implemented animated navigation pill, gradient hover effects, and scroll-reveal transitions."
-      ]
-    }
   ];
 
   return (
