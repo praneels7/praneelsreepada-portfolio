@@ -16,6 +16,7 @@ function ProjectsPage() {
         "Implemented animated navigation pill, gradient hover effects, and scroll-reveal transitions."
       ]
     },
+    {
       title: "RAG Bot",
       tech: ["React", "Node.js", "MongoDB", "Gemini API", "LangChain"],
       date: "Dec 2025 \u2013 Present",
