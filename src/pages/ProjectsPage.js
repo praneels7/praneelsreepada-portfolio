@@ -74,7 +74,7 @@ function ProjectsPage() {
         "Developed responsive frontend with accessible UI/UX design principles.",
         "Implemented backend data persistence using Node.js and MongoDB Atlas."
       ]
-    },
+    }
   ];
 
   return (
